@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900">
+        <div class="form p-10 text-white">
+            <form action="/create"  method="post">
+            <input type="text" class="block px-5 py-2 w-full  rounded-md outline-none bg-zinc-800" placeholder="Title goes here.." name="title">
+            <textarea class="block mt-2 px-5 py-2 resize-none  w-full   rounded-md outline-none bg-zinc-800" placeholder="write the tasks here.." name="detail"></textarea>
+            <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="create task">
+        </form>
+        </div>
+        <div class="tasks flex gap-3 flex-wrap p-10">
+           <% if(files.length>0){ %>
+            <% files.forEach(function(val) {   %>
+                
+                <div class="task  w-96 px-3 py-4 bg-zinc-800 rounded-md ">
+                    <!-- <h1 class="text-white-200 text-1xl tracking tighter"><%=val%> </h1> -->
+                    <% if (markedFiles.includes(val)) { %>
+                        <!-- Show Unmark option if file is marked -->
+                        <h1 class="text-green-500 line-through text-1xl tracking tighter"><%=val%> </h1>
+                        
+                    <% } else { %>
+                        <!-- Show Mark as Done option if file is not marked -->
+                        <h1 class="text-white text-1xl tracking tighter"><%=val%> </h1>
+                       
+                    <% } %>  
+                  <div class="flex -500 w-full justify-between items-center mt-3">
+                    <a class="text-blue-500 inline-block " href="/files/<%=val%>">read more ></a>
+                    <a class="text-red-500 inline-block " href="/delete/<%=val%>">delete.</a>
+                    
+                    <% if (markedFiles.includes(val)) { %>
+                        <!-- Show Unmark option if file is marked -->
+                        
+                        <a class="text-yellow-500 inline-block " href="/markdone/<%= val %>">Unmark.</a>
+                    <% } else { %>
+                        <!-- Show Mark as Done option if file is not marked -->
+                       
+                        <a class="text-green-500 inline-block " href="/markdone/<%= val %>">Mark as done.</a>
+                    <% } %>                  
+                    <!-- <a class="text-green-500 inline-block " href="/markdone/<%=val%>">mark as done.</a> -->
+                    <a class="text-zinc-600" href="/edit/<%=val%>" >edit</a>
+                  </div>
+                </div>
+            <% }) %>
+           <% }else{ %>
+            <h3 class="text-zinc-600">KOI KAM NAI HAI</h3>
+          <% } %>
+        
+            <!-- <div class=" task hidden w-72 px-3 py-4 bg-zinc-800 rounded-md">
+                <h1 class="text-white text-1xl tracking tighter">LETs create in the middle of the night </h1>
+                <a class="text-blue-500 inline-block mt-3" href="">Read more.</a>
+            </div>
+            <div class="task hidden w-72 px-3 py-4 bg-zinc-800 rounded-md">
+                <h1 class="text-white text-1xl tracking tighter">LETs create in the middle of the night </h1>
+                <a class="text-blue-500 inline-block mt-3" href="">Read more.</a>
+            </div>
+             -->
+        </div>
+    </div>
+</body>
+</html>
